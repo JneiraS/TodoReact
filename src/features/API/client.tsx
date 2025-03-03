@@ -16,4 +16,19 @@ const GetTasks = async (): Promise<AxiosResponse<ApiResponse>> => {
   }
 };
 
-export default GetTasks;
+const AddTask = async (title: string): Promise<AxiosResponse<ApiResponse>> => {
+  try {
+    const newTask = {
+      title,
+      completed: false
+    };
+    return await axios.post<ApiResponse>("http://localhost:5000/tasks", newTask);
+  } catch (error) {
+    console.error("Erreur lors de l'ajout de la tâche :", error);
+    throw error;
+  }
+};
+
+export { GetTasks, AddTask };
+
+

@@ -5,7 +5,7 @@ import { Task } from "./entities/task";
 import ButtonDarkMod from "./components/button";
 import TodoList from "./components/todoList";
 import AddTodoForm from "./components/addTodoForm";
-import GetTasks from "./features/API/client";
+import { GetTasks, AddTask } from "./features/API/client";
 
 function App() {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
@@ -50,6 +50,10 @@ function App() {
 
   useEffect(() => {
     const fetchData = async () => {
+
+
+
+      
       try {
         const response = await GetTasks();
         if (Array.isArray(response.data)) {
@@ -77,16 +81,20 @@ function App() {
   return (
     <>
       <div>
-        <h1>Bienvenue sur mon App</h1>
         <ButtonDarkMod theme={theme} toggleTheme={toggleTheme} />
       </div>
       <AddTodoForm
-        onAddTask={(task: string) => {
-          const newTask = new TaskCreator().factoryMethod(
-            tasks.length + 1,
-            task
-          );
-          setTasks([...tasks, newTask]);
+        onAddTask={async (task: string) => {
+          try {
+            const response = await AddTask(task);
+            const newTask = new TaskCreator().factoryMethod(
+              response.data.id,
+              response.data.title
+            );
+            setTasks([...tasks, newTask]);
+          } catch (error) {
+            console.error("Erreur lors de l'ajout de la tâche:", error);
+          }
         }}
       />
       <div>

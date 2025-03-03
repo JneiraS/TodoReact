@@ -29,6 +29,19 @@ const AddTask = async (title: string): Promise<AxiosResponse<ApiResponse>> => {
   }
 };
 
-export { GetTasks, AddTask };
+
+
+
+const UpdateTaskCompleted = async (id: number, completed: boolean): Promise<AxiosResponse<ApiResponse>> => {
+  try {
+    return await axios.patch<ApiResponse>(`http://localhost:5000/tasks/${id}`, { completed });
+  } catch (error) {
+    console.error("Erreur lors de la mise à jour de la tâche :", error);
+    throw error;
+  }
+};
+
+export { GetTasks, AddTask, UpdateTaskCompleted };
+
 
 

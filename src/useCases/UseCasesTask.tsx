@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { TaskCreator } from "../entities/taskCreator";
-import { AddTask, GetTasks } from "../features/API/client";
+import { AddTask, GetTasks, UpdateTaskCompleted } from "../features/API/client";
 import { Task } from "../entities/task";
 import TodoList from "../components/todoList";
 import AddTodoForm from "../components/addTodoForm";
@@ -12,15 +12,18 @@ export function UseCasesTask() {
     try {
       const response = await GetTasks();
       if (Array.isArray(response.data)) {
-        const convertedData = response.data.map((item: { id: number; title: string }) => {
-          return new TaskCreator().factoryMethod(item.id, item.title);
+        const convertedData = response.data.map((item: { id: number; title: string; completed: boolean }) => {
+          const task = new TaskCreator().factoryMethod(item.id, item.title);
+          task.completed = item.completed;
+          return task;
         });
         setTasks(convertedData);
       } else {
         const initialTasks: Task[] = [];
         if (Array.isArray(response.data)) {
-          response.data.forEach((item: { id: number; title: string }) => {
+          response.data.forEach((item: { id: number; title: string; completed: boolean }) => {
             const task = new TaskCreator().factoryMethod(item.id, item.title);
+            task.completed = item.completed;
             initialTasks.push(task);
           });
         }
@@ -53,6 +56,7 @@ export function UseCasesTask() {
       if (task.id === id) {
         const updatedTask = new TaskCreator().factoryMethod(task.id, task.title);
         updatedTask.completed = !task.completed;
+        UpdateTaskCompleted(task.id, updatedTask.completed);
         return updatedTask;
       }
       return task;
@@ -63,7 +67,7 @@ export function UseCasesTask() {
     <div>
       <AddTodoForm onAddTask={handleAddTask} />
       <h2>Mes Tâches</h2>
-      <TodoList tasks={tasks} onToggle={handleToggle} />
+      <TodoList tasks={tasks} onToggle={handleToggle}  />
     </div>
   );
 }

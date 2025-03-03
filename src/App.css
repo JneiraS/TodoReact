@@ -12,7 +12,7 @@
 
 [data-theme="dark"] {
   --color-bg: #1e1e1e;
-  --color-text: #f0f0f0;
+  --color-text: #f5f3f3;
 }
 
 
@@ -52,7 +52,7 @@ li {
 
 li:hover {
   background: #4a90e2;
-  color: white;
+  color: var(--color-bg);
   transform: translateY(-5px);
 }
 
@@ -61,10 +61,8 @@ form {
   display: flex;
   align-items: center;
   gap: 10px;
-  background: white;
   padding: 10px;
   border-radius: var(--border-radius);
-
   max-width: 400px;
   margin: 20px auto;
 }
@@ -77,6 +75,8 @@ input {
   border: 2px solid #ddd;
   border-radius: var(--border-radius);
   outline: none;
+  background-color: var(--color-bg);
+  color: var(--color-text);
   transition: var(--transition);
 }
 

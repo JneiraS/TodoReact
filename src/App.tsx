@@ -5,6 +5,7 @@ import { Task } from "./entities/task";
 import ButtonDarkMod from "./components/button";
 import TodoList from "./components/todoList";
 import AddTodoForm from "./components/addTodoForm";
+import GetTasks from "./features/API/client";
 
 function App() {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
@@ -27,11 +28,19 @@ function App() {
     }));
   };
 
-  const apiMock = [
-    { id: 1, title: "Apprendre React" },
-    { id: 2, title: "Créer une Todo List" },
-    { id: 3, title: "Boire un café" },
-  ];
+  const convertApiData = (apiData: { id: string; title: string; completed: boolean }[]) => {
+    return apiData.map(item => {
+      const task = new TaskCreator().factoryMethod(Number(item.id), item.title);
+      task.completed = item.completed;
+      return task;
+    });
+  };
+
+  // const apiMock = [
+  //   { id: 1, title: "Apprendre React" },
+  //   { id: 2, title: "Créer une Todo List" },
+  //   { id: 3, title: "Boire un café" },
+  // ];
 
   // Appliquer le thème au chargement
   useEffect(() => {
@@ -39,16 +48,30 @@ function App() {
     localStorage.setItem("theme", theme);
   }, [theme]);
 
-  // Charger les tâches
   useEffect(() => {
-    const initialTasks: Task[] = [];
-    apiMock.forEach((item: { id: number; title: string }) => {
-      const task = new TaskCreator().factoryMethod(item.id, item.title);
-      initialTasks.push(task);
-    });
-
-    setTasks(initialTasks);
-
+    const fetchData = async () => {
+      try {
+        const response = await GetTasks();
+        if (Array.isArray(response.data)) {
+          const convertedData = convertApiData(response.data);
+          setTasks(convertedData);
+        } else {
+          const initialTasks: Task[] = [];
+          if (Array.isArray(response.data)) {
+            response.data.forEach((item: { id: number; title: string }) => {
+              const task = new TaskCreator().factoryMethod(item.id, item.title);
+              initialTasks.push(task);
+            });
+          }
+          setTasks(initialTasks);
+        }
+      } catch (error) {
+        console.error("Erreur lors du chargement des données : ", error);
+      } finally {
+        fetchData();
+      }
+    };
+    fetchData();
   }, []);
 
   return (

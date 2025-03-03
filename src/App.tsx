@@ -3,30 +3,18 @@ import { useState, useEffect } from "react";
 import { TaskCreator } from "./entities/taskCreator";
 import { Task } from "./entities/task";
 import ButtonDarkMod from "./components/button";
-import TodoList from "./components/todoList";
-import AddTodoForm from "./components/addTodoForm";
-import { GetTasks, AddTask } from "./features/API/client";
+import { GetTasks } from "./features/API/client";
+import { UseCasesTask } from "./useCases/UseCasesTask";
 
 function App() {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
   const [tasks, setTasks] = useState<Task[]>([]);
-
   // Fonction pour basculer de mode
   const toggleTheme = () => {
     setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
   };
 
-  // Ajouter la fonction onToggle
-  const handleToggle = (id: number) => {
-    setTasks((prevTasks) => prevTasks.map(task => {
-      if (task.id === id) {
-        const updatedTask = new TaskCreator().factoryMethod(task.id, task.title);
-        updatedTask.completed = !task.completed;
-        return updatedTask;
-      }
-      return task;
-    }));
-  };
+
 
   const convertApiData = (apiData: { id: string; title: string; completed: boolean }[]) => {
     return apiData.map(item => {
@@ -36,11 +24,6 @@ function App() {
     });
   };
 
-  // const apiMock = [
-  //   { id: 1, title: "Apprendre React" },
-  //   { id: 2, title: "Créer une Todo List" },
-  //   { id: 3, title: "Boire un café" },
-  // ];
 
   // Appliquer le thème au chargement
   useEffect(() => {
@@ -50,10 +33,6 @@ function App() {
 
   useEffect(() => {
     const fetchData = async () => {
-
-
-
-      
       try {
         const response = await GetTasks();
         if (Array.isArray(response.data)) {
@@ -83,23 +62,9 @@ function App() {
       <div>
         <ButtonDarkMod theme={theme} toggleTheme={toggleTheme} />
       </div>
-      <AddTodoForm
-        onAddTask={async (task: string) => {
-          try {
-            const response = await AddTask(task);
-            const newTask = new TaskCreator().factoryMethod(
-              response.data.id,
-              response.data.title
-            );
-            setTasks([...tasks, newTask]);
-          } catch (error) {
-            console.error("Erreur lors de l'ajout de la tâche:", error);
-          }
-        }}
-      />
       <div>
-        <h1>ToDo List</h1>
-        <TodoList tasks={tasks} onToggle={handleToggle} />
+      <UseCasesTask />
+     
       </div>
     </>
   );

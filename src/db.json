@@ -1,20 +1,29 @@
-
 {
   "tasks": [
     {
-      "id": 1,
-      "title": "Apprendre React",
-      "completed" : false
+      "id": "1",
+      "title": "Apprendre Réact",
+      "completed": false
     },
     {
-      "id": 2,
+      "id": "2",
       "title": "Créer une Todo List",
-      "completed" : false
+      "completed": false
     },
     {
-      "id": 3,
+      "id": "3",
       "title": "Boire un café",
-      "completed" : false
+      "completed": false
+    },
+    {
+      "id": "569c",
+      "title": "digiforma",
+      "completed": false
+    },
+    {
+      "id": "9a9d",
+      "title": "Finir les exercices",
+      "completed": false
     }
   ]
 }

@@ -1,41 +1,40 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import Greeting from './components/text'
+
 import './App.css'
 import { TaskCreator } from './entities/taskCreator'
+import { Task } from './entities/task'
 
 function App() {
-  const [count, setCount] = useState(0)
-  const userName = 'Patrick'
-  const newTask = new TaskCreator().factoryMethod()
-  newTask.setId(15);
-  newTask.setTitle("Apprender React")
+
+  const apiMock =[
+    {id:1, title: "Apprendre React"},
+    {id:2, title: "Créer une Todo List"},
+    {id:3, title: "Boire un café"}
+  ]
+
+  // const newTask = new TaskCreator().factoryMethod()
+  //newTask.setId(15);
+  //newTask.setTitle("Apprender React")
+  
+  const tasks: Task[] = []
+  // Correction de la boucle pour créer les tâches
+  apiMock?.forEach((item: { id: number, title: string }) => {
+    const task = new TaskCreator().factoryMethod(item.id, item.title)
+
+    tasks.push(task)
+  })
   
   return (
     <>
       <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <h1>ToDo List</h1> 
+        <ul>
+          {tasks.map((task) => (
+            <li key={task.id}>
+              {task.title}
+            </li>
+          ))}
+        </ul>
       </div>
-      <h1>Vite + React</h1>
-      <h1>{newTask.id} et {newTask.title}</h1>
-      <h2> <Greeting name={userName} /></h2>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   )
 }

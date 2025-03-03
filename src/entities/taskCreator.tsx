@@ -1,18 +1,11 @@
 import { Task } from "./task";
-import { Product } from "../interfaces/iTask";
 
-abstract class Creator {
 
-    public abstract factoryMethod(): Product
-}
 
-export class TaskCreator extends Creator {
-    public factoryMethod(): Product {
-        return new Task(0, "");
+export class TaskCreator {
+    public factoryMethod(id: number, title: string): Task {
+        return new Task(id, title);
     }
 
-    /**
-     * setId
-     */
 
 }

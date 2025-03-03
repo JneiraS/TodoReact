@@ -1,4 +1,4 @@
-/* 🌈 Variables CSS */
+
 :root {
   --color-primary: #4a90e2;
   --color-secondary: #ff6b6b;
@@ -9,13 +9,13 @@
   --font-family: 'Inter', sans-serif;
 }
 
-/* 🌙 Mode sombre */
+
 [data-theme="dark"] {
   --color-bg: #1e1e1e;
   --color-text: #f0f0f0;
 }
 
-/* 🏠 Styles globaux */
+
 body {
   font-family: var(--font-family);
   background-color: var(--color-bg);
@@ -31,6 +31,94 @@ body {
 
 ul {
   list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Adaptatif */
+  gap: 15px;
+  list-style: none;
+  padding: 0;
+  max-width: 500px;
+}
+
+li {
+
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: bold;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+}
+
+li:hover {
+  background: #4a90e2;
+  color: white;
+  transform: translateY(-5px);
+}
+
+
+form {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: white;
+  padding: 10px;
+  border-radius: var(--border-radius);
+
+  max-width: 400px;
+  margin: 20px auto;
+}
+
+
+input {
+  flex: 1; 
+  padding: 12px;
+  font-size: 1rem;
+  border: 2px solid #ddd;
+  border-radius: var(--border-radius);
+  outline: none;
+  transition: var(--transition);
+}
+
+
+input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
+}
+
+
+button {
+  background: var(--color-primary);
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+
+button:hover {
+  background: var(--color-secondary);
+  transform: translateY(-2px);
+}
+
+
+@media (max-width: 500px) {
+  form {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  input {
+    width: 100%;
+  }
+  
+  button {
+    width: 100%;
+  }
 }
 
 #root {
@@ -83,7 +171,6 @@ h1 {
   transform: translateY(-2px);
 }
 
-/* 🎉 Bouton switch */
 .theme-switch {
   background: none;
   border: 2px solid var(--color-text);

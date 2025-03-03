@@ -5,11 +5,12 @@ import { TaskCreator } from './entities/taskCreator'
 import { Task } from './entities/task'
 import ButtonDarkMod from './components/button'
 import TodoList from './components/todoList'
+import AddTodoForm from './components/addTodoForm'
 
 function App() {
-
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
-  const tasks: Task[] = []
+  const [tasks, setTasks] = useState<Task[]>([]);
+
   // Fonction pour basculer le mode
   const toggleTheme = () => {
     setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
@@ -21,18 +22,21 @@ function App() {
     { id: 3, title: "Boire un café" }
   ]
 
-  
   // Appliquer le thème au chargement
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
     localStorage.setItem("theme", theme);
   }, [theme]);
-
-
-  apiMock?.forEach((item: { id: number, title: string }) => {
-    const task = new TaskCreator().factoryMethod(item.id, item.title)
-    tasks.push(task)
-  })
+  
+  // Charger les tâches
+  useEffect(() => {
+    const initialTasks: Task[] = [];
+    apiMock.forEach((item: { id: number, title: string }) => {
+      const task = new TaskCreator().factoryMethod(item.id, item.title);
+      initialTasks.push(task);
+    });
+    setTasks(initialTasks);
+  }, []);
 
   return (
     <>
@@ -40,11 +44,14 @@ function App() {
         <h1>Bienvenue sur mon App</h1>
         <ButtonDarkMod theme={theme} toggleTheme={toggleTheme} />
       </div>
+      <AddTodoForm onAddTask={(task: string) => {
+        const newTask = new TaskCreator().factoryMethod(tasks.length + 1, task) 
+        setTasks([...tasks, newTask])
+      }} />
       <div>
         <h1>ToDo List</h1>
         <TodoList tasks={tasks}/>
       </div>
     </>
   )
-}
-export default App
+}export default App

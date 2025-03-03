@@ -1,8 +1,17 @@
 
+interface ButtonDarkModProps {
+  theme: string;
+  toggleTheme: () => void;
+}
+
+function ButtonDarkMod({ theme, toggleTheme }: ButtonDarkModProps) {
+  return (
+    <button className="theme-switch" onClick={toggleTheme}>
+      {theme === "light" ? "🌙 Mode sombre" : "☀️ Mode clair"}
+    </button>
+  );
+}
+
+export default ButtonDarkMod;
 
 
-function Greeting({ name }: { name: string }) {
-    return <h1>Hello, {name}</h1>;
-  }
-
-export default Greeting;

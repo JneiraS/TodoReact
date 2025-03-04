@@ -2,14 +2,14 @@ import { useState, useEffect } from "react";
 import { TaskCreator } from "../entities/taskCreator";
 import { AddTask, GetTasks, UpdateTaskCompleted, DeleteTask } from "../services/taskServices";
 import { Task } from "../entities/task";
-import TodoList from "../components/todoList";
-import AddTodoForm from "../components/addTodoForm";
+import TodoList from "./todoList";
+import AddTodoForm from "./addTodoForm";
 
 
-// Le composant `UseCasesTask` gère les tâches : récupération, ajout, 
+// Le composant `UseCases` gère les tâches : récupération, ajout, 
 // modification et suppression, en utilisant les services et entités 
 // appropriés.
-export function UseCasesTask() {
+export function UseCases() {
   const [tasks, setTasks] = useState<Task[]>([]);
 
   const fetchData = async () => {
@@ -73,6 +73,5 @@ export function UseCasesTask() {
       <TodoList tasks={tasks} onToggle={handleToggle} onDelete={handleDelete} />
     </div>
   );
-}
-// Exportez le composant au lieu de handleToggle
-export default UseCasesTask;
+}// Exportez le composant au lieu de handleToggle
+export default UseCases;

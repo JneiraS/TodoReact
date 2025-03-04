@@ -1,7 +1,7 @@
 import "./App.css";
 import { useState, useEffect, useCallback } from "react";
 import { ButtonDarkMod } from "./components/buttons";
-import { UseCasesTask } from "./useCases/UseCasesTask";
+import { UseCases } from "./components/UseCasesTask";
 import { THEME } from "./constants/constants";
 
 function App() {
@@ -18,7 +18,7 @@ function App() {
   return (
     <>
       <ButtonDarkMod theme={theme} toggleTheme={toggleTheme} />
-      <UseCasesTask />
+      <UseCases />
     </>
   );
 }

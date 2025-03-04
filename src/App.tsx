@@ -2,7 +2,7 @@ import "./App.css";
 import { useState, useEffect, useCallback } from "react";
 import ButtonDarkMod from "./components/button";
 import { UseCasesTask } from "./useCases/UseCasesTask";
-import { THEME } from "./constants";
+import { THEME } from "./constants/constants";
 
 function App() {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || THEME.LIGHT);

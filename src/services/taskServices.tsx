@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from "axios";
-import { TaskCreator } from "../../entities/taskCreator";
+
+import { API } from "../constants/constants";
 
 interface ApiResponse {
   id: number;
@@ -9,7 +10,7 @@ interface ApiResponse {
 
 const GetTasks = async (): Promise<AxiosResponse<ApiResponse>> => {
   try {
-     return await axios.get<ApiResponse>("http://localhost:5000/tasks");
+     return await axios.get<ApiResponse>(API.BASE_URL.concat(API.TASKS));
 
   } catch (error) {
     console.error("Erreur lors de la récupération des données :", error);
@@ -23,35 +24,26 @@ const AddTask = async (title: string): Promise<AxiosResponse<ApiResponse>> => {
       title,
       completed: false
     };
-    return await axios.post<ApiResponse>("http://localhost:5000/tasks", newTask);
+    return await axios.post<ApiResponse>(API.BASE_URL.concat(API.TASKS), newTask);
   } catch (error) {
     console.error("Erreur lors de l'ajout de la tâche :", error);
     throw error;
   }
 };
 
-
-
-
 const UpdateTaskCompleted = async (id: number, completed: boolean): Promise<AxiosResponse<ApiResponse>> => {
   try {
-    return await axios.patch<ApiResponse>(`http://localhost:5000/tasks/${id}`, { completed });
+    return await axios.patch<ApiResponse>(`${API.BASE_URL}${API.TASKS}/${id}`, { completed });
   } catch (error) {
     console.error("Erreur lors de la mise à jour de la tâche :", error);
     throw error;
   }
 };
 
-const convertApiData = (apiData: { id: string; title: string; completed: boolean }[]) => {
-  return apiData.map(item => {
-    const task = new TaskCreator().factoryMethod(Number(item.id), item.title);
-    task.completed = item.completed;
-    return task;
-  });
-};
 
 
-export { GetTasks, AddTask, UpdateTaskCompleted,convertApiData };
+
+export { GetTasks, AddTask, UpdateTaskCompleted };
 
 
 

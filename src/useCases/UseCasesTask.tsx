@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { TaskCreator } from "../entities/taskCreator";
-import { AddTask, GetTasks, UpdateTaskCompleted } from "../features/API/client";
+import { AddTask, GetTasks, UpdateTaskCompleted } from "../services/taskServices";
 import { Task } from "../entities/task";
 import TodoList from "../components/todoList";
 import AddTodoForm from "../components/addTodoForm";

@@ -13,7 +13,7 @@
     {
       "id": "3",
       "title": "Boire un café",
-      "completed": false
+      "completed": true
     },
     {
       "id": "569c",
@@ -23,6 +23,11 @@
     {
       "id": "9a9d",
       "title": "Finir les exercices",
+      "completed": false
+    },
+    {
+      "id": "7965",
+      "title": "Création de priorités",
       "completed": false
     }
   ]

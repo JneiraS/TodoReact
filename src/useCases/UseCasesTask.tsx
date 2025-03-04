@@ -5,6 +5,10 @@ import { Task } from "../entities/task";
 import TodoList from "../components/todoList";
 import AddTodoForm from "../components/addTodoForm";
 
+
+// Le composant `UseCasesTask` gère les tâches : récupération, ajout, 
+// modification et suppression, en utilisant les services et entités 
+// appropriés.
 export function UseCasesTask() {
   const [tasks, setTasks] = useState<Task[]>([]);
 

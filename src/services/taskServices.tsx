@@ -8,6 +8,8 @@ interface ApiResponse {
   completed: boolean
 }
 
+/**
+/** Récupère de manière asynchrone une liste de tâches depuis l'API. */
 const GetTasks = async (): Promise<AxiosResponse<ApiResponse>> => {
   try {
      return await axios.get<ApiResponse>(API.BASE_URL.concat(API.TASKS));
@@ -18,6 +20,10 @@ const GetTasks = async (): Promise<AxiosResponse<ApiResponse>> => {
   }
 };
 
+
+/**
+ * Ajoute une nouvelle tâche de manière asynchrone.
+ */
 const AddTask = async (title: string): Promise<AxiosResponse<ApiResponse>> => {
   try {
     const newTask = {
@@ -31,6 +37,9 @@ const AddTask = async (title: string): Promise<AxiosResponse<ApiResponse>> => {
   }
 };
 
+/**
+ * Mets à jour le statut de complétion d'une tâche de manière asynchrone.
+ */
 const UpdateTaskCompleted = async (id: number, completed: boolean): Promise<AxiosResponse<ApiResponse>> => {
   try {
     return await axios.patch<ApiResponse>(`${API.BASE_URL}${API.TASKS}/${id}`, { completed });
@@ -40,6 +49,9 @@ const UpdateTaskCompleted = async (id: number, completed: boolean): Promise<Axio
   }
 };
 
+/**
+* Supprime une tâche de manière asynchrone.
+ */
 const DeleteTask = async (id: number): Promise<AxiosResponse<void>> => {
   try {
     return await axios.delete(`${API.BASE_URL}${API.TASKS}/${id}`);

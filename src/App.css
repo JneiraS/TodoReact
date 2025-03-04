@@ -216,17 +216,17 @@
   .haute { 
   font-weight: 100;
   border-radius: var(--border-radius);
-  font-size: 9px;
-  padding: 0 .2em;
-  color: var(--color-bg);
+  font-size: 11px;
+  padding: 0 .4em;
+  color: white;
   
   }
   .basse {
-    background-color: green;
+    background-color: rgb(85, 185, 85);
   }
   .haute {
-    background-color: red;
+    background-color: rgb(255, 68, 68)
   }
   .moyenne {
-    background-color: orange;
+    background-color: rgb(243, 191, 95);
   }

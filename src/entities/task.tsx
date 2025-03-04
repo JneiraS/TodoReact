@@ -3,12 +3,14 @@ export class Task {
 
     id: number;
     title: string;
+    priority: string;
     completed : boolean
 
 
     constructor(id: number, title: string) {
         this.id = id;
         this.title = title;
+        this.priority = "basse"
         this.completed = false
     }
 

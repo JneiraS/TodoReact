@@ -19,6 +19,7 @@ export function UseCases() {
         ? response.data.map(item => {
             const task = new TaskCreator().factoryMethod(item.id, item.title);
             task.completed = item.completed;
+            task.priority = item.priority;
             return task;
           })
         : [];
@@ -32,13 +33,15 @@ export function UseCases() {
     fetchData();
   }, []);
 
-  const handleAddTask = async (task: string) => {
+  const handleAddTask = async (task: string, priority: string) => {
     try {
-      const response = await AddTask(task);
+      const response = await AddTask(task, priority);
       const newTask = new TaskCreator().factoryMethod(
         response.data.id,
         response.data.title
       );
+      newTask.priority = priority;
+      newTask.completed = false;
       setTasks([...tasks, newTask]);
     } catch (error) {
       console.error("Erreur lors de l'ajout de la tâche:", error);

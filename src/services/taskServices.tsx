@@ -24,10 +24,11 @@ const GetTasks = async (): Promise<AxiosResponse<ApiResponse>> => {
 /**
  * Ajoute une nouvelle tâche de manière asynchrone.
  */
-const AddTask = async (title: string): Promise<AxiosResponse<ApiResponse>> => {
+const AddTask = async (title: string, priority: string): Promise<AxiosResponse<ApiResponse>> => {
   try {
     const newTask = {
       title,
+      priority,
       completed: false
     };
     return await axios.post<ApiResponse>(API.BASE_URL.concat(API.TASKS), newTask);
@@ -36,7 +37,6 @@ const AddTask = async (title: string): Promise<AxiosResponse<ApiResponse>> => {
     throw error;
   }
 };
-
 /**
  * Mets à jour le statut de complétion d'une tâche de manière asynchrone.
  */

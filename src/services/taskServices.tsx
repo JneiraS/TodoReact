@@ -40,10 +40,16 @@ const UpdateTaskCompleted = async (id: number, completed: boolean): Promise<Axio
   }
 };
 
+const DeleteTask = async (id: number): Promise<AxiosResponse<void>> => {
+  try {
+    return await axios.delete(`${API.BASE_URL}${API.TASKS}/${id}`);
+  } catch (error) {
+    console.error("Erreur lors de la suppression de la tâche :", error);
+    throw error;
+  }
+};
 
-
-
-export { GetTasks, AddTask, UpdateTaskCompleted };
+export { GetTasks, AddTask, UpdateTaskCompleted, DeleteTask };
 
 
 

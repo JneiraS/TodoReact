@@ -1,4 +1,3 @@
-
 interface ButtonDarkModProps {
   theme: string;
   toggleTheme: () => void;
@@ -12,10 +11,19 @@ function ButtonDarkMod({ theme, toggleTheme }: ButtonDarkModProps) {
   );
 }
 
-function ButtonDelete() {
-  return (
-    <button className="delete-button">Supprimer
-    </button>
-  )
+interface ButtonDeleteProps {
+  onDelete: () => void;
 }
+
+function ButtonDelete({ onDelete }: ButtonDeleteProps) {
+  return (
+    <button className="delete-button" onClick={(e) => {
+      e.stopPropagation();
+      onDelete();
+    }}>
+      Supprimer
+    </button>
+  );
+}
+
 export { ButtonDarkMod, ButtonDelete };

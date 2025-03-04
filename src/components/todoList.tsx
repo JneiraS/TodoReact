@@ -2,11 +2,18 @@ import { Task } from "../entities/task";
 import React from 'react';
 import { ButtonDelete } from "./buttons";
 
-const TodoList = React.memo(({tasks, onToggle}: {tasks: Task[], onToggle: (id: number) => void}) =>{
-   return (
+const TodoList = React.memo(({
+  tasks, 
+  onToggle,
+  onDelete
+}: {
+  tasks: Task[], 
+  onToggle: (id: number) => void,
+  onDelete: (id: number) => void
+}) => {
+  return (
     <ul>
       {tasks.map((task) => (
-      
         <li 
           key={task.id} 
           onClick={() => onToggle(task.id)} 
@@ -20,13 +27,12 @@ const TodoList = React.memo(({tasks, onToggle}: {tasks: Task[], onToggle: (id: n
         >   
           {task.title}
           <div className="infos"> 
-          <ButtonDelete/>
+            <ButtonDelete onDelete={() => onDelete(task.id)}/>
           </div> 
         </li>
       ))}    
     </ul>
-     
-   );
+  );
 });
 
 export default TodoList

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { TaskCreator } from "../entities/taskCreator";
-import { AddTask, GetTasks, UpdateTaskCompleted } from "../services/taskServices";
+import { AddTask, GetTasks, UpdateTaskCompleted, DeleteTask } from "../services/taskServices";
 import { Task } from "../entities/task";
 import TodoList from "../components/todoList";
 import AddTodoForm from "../components/addTodoForm";
@@ -53,11 +53,20 @@ export function UseCasesTask() {
     }));
   };
 
+  const handleDelete = async (id: number) => {
+    try {
+      await DeleteTask(id);
+      setTasks(prevTasks => prevTasks.filter(task => task.id !== id));
+    } catch (error) {
+      console.error("Erreur lors de la suppression de la tâche:", error);
+    }
+  };
+
   return (
     <div>
       <AddTodoForm onAddTask={handleAddTask} />
       <h2>Mes Tâches</h2>
-      <TodoList tasks={tasks} onToggle={handleToggle}  />
+      <TodoList tasks={tasks} onToggle={handleToggle} onDelete={handleDelete} />
     </div>
   );
 }

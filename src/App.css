@@ -31,12 +31,14 @@
   ul {
     list-style: none;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Adaptatif */
-    gap: 15px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 2fr));
+    grid-auto-rows: minmax(100px, auto);
+    gap: 20px;
     list-style: none;
     padding: 0;
-    max-width: 500px;
-  }
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;  }
 
   li {
     position: relative;
@@ -126,7 +128,7 @@
   #root {
     text-align: center;
     padding: 20px;
-    max-width: 600px;
+    max-width: 900px;
     border-radius: var(--border-radius);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     background: white;
@@ -215,9 +217,9 @@
   .basse,
   .haute { 
   font-weight: 100;
-  border-radius: var(--border-radius);
-  font-size: 11px;
-  padding: 0 .4em;
+  border-radius: 4px;
+  font-size: 10px;
+  padding: 0 .5em;
   color: white;
   
   }
@@ -229,4 +231,12 @@
   }
   .moyenne {
     background-color: rgb(243, 191, 95);
+  }
+
+  .filter-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    font-size: smaller;
+    margin-bottom: 20px;
   }

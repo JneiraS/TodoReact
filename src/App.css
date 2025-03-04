@@ -41,6 +41,7 @@ ul {
 
 li {
 
+  position: relative;
   padding: 15px;
   border-radius: 8px;
   text-align: center;
@@ -48,6 +49,10 @@ li {
   font-weight: bold;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100px;
 }
 
 li:hover {
@@ -83,7 +88,7 @@ input {
 
 input:focus {
   border-color: var(--color-primary);
-  box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
+  box-shadow: 0 0 5px rgba(169, 175, 180, 0.5);
 }
 
 
@@ -186,4 +191,24 @@ h1 {
 .theme-switch:hover {
   background: var(--color-text);
   color: var(--color-bg);
+}
+
+.infos {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.delete-button {
+  background-color: rgb(255, 68, 68);
+  color: white;
+  font-size: 10px;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  height: fit-content;
+  transition: var(--transition);
 }

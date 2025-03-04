@@ -12,6 +12,10 @@ function ButtonDarkMod({ theme, toggleTheme }: ButtonDarkModProps) {
   );
 }
 
-export default ButtonDarkMod;
-
-
+function ButtonDelete() {
+  return (
+    <button className="delete-button">Supprimer
+    </button>
+  )
+}
+export { ButtonDarkMod, ButtonDelete };

@@ -3,7 +3,7 @@
     {
       "id": "1",
       "title": "Apprendre Réact",
-      "completed": false
+      "completed": true
     },
     {
       "id": "2",
@@ -13,12 +13,12 @@
     {
       "id": "3",
       "title": "Boire un café",
-      "completed": true
+      "completed": false
     },
     {
       "id": "569c",
       "title": "digiforma",
-      "completed": true
+      "completed": false
     },
     {
       "id": "9a9d",

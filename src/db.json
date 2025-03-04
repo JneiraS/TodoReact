@@ -1,33 +1,87 @@
 {
   "tasks": [
     {
-      "id": "1",
-      "title": "Apprendre Réact",
-      "completed": true
-    },
-    {
-      "id": "2",
-      "title": "Créer une Todo List",
-      "completed": false
-    },
-    {
       "id": "3",
       "title": "Boire un café",
+      "priority": "haute",
       "completed": false
     },
     {
       "id": "569c",
       "title": "digiforma",
-      "completed": false
+      "priority": "basse",
+      "completed": true
     },
     {
       "id": "9a9d",
       "title": "Finir les exercices",
-      "completed": false
+      "priority": "moyenne",
+      "completed": true
     },
     {
       "id": "7965",
       "title": "Création de priorités",
+      "priority": "moyenne",
+      "completed": false
+    },
+    {
+      "id": "f260",
+      "title": "Apprendre React",
+      "priority": "moyenne",
+      "completed": true
+    },
+    {
+      "id": "b9ba",
+      "title": "Boire",
+      "priority": "haute",
+      "completed": true
+    },
+    {
+      "id": "d34f",
+      "title": "Mettre à jour le CV",
+      "priority": "moyenne",
+      "completed": false
+    },
+    {
+      "id": "a7e1",
+      "title": "Lire un chapitre d’un livre",
+      "priority": "basse",
+      "completed": false
+    },
+    {
+      "id": "c920",
+      "title": "Faire du sport",
+      "priority": "haute",
+      "completed": false
+    },
+    {
+      "id": "e5b2",
+      "title": "Préparer la réunion de demain",
+      "priority": "haute",
+      "completed": true
+    },
+    {
+      "id": "f7a4",
+      "title": "Coder une API en 4D",
+      "priority": "moyenne",
+      "completed": false
+    },
+    {
+      "id": "h64c",
+      "title": "Acheter des courses",
+      "priority": "basse",
+      "completed": false
+    },
+    {
+      "id": "j82d",
+      "title": "Réviser un tutoriel React",
+      "priority": "moyenne",
+      "completed": false
+    },
+    {
+      "id": "k91f",
+      "title": "Planifier un week-end",
+      "priority": "basse",
       "completed": false
     }
   ]

@@ -11,26 +11,16 @@ export function UseCasesTask() {
   const fetchData = async () => {
     try {
       const response = await GetTasks();
-      if (Array.isArray(response.data)) {
-        const convertedData = response.data.map((item: { id: number; title: string; completed: boolean }) => {
-          const task = new TaskCreator().factoryMethod(item.id, item.title);
-          task.completed = item.completed;
-          return task;
-        });
-        setTasks(convertedData);
-      } else {
-        const initialTasks: Task[] = [];
-        if (Array.isArray(response.data)) {
-          response.data.forEach((item: { id: number; title: string; completed: boolean }) => {
+      const tasks = Array.isArray(response.data) 
+        ? response.data.map(item => {
             const task = new TaskCreator().factoryMethod(item.id, item.title);
             task.completed = item.completed;
-            initialTasks.push(task);
-          });
-        }
-        setTasks(initialTasks);
-      }
+            return task;
+          })
+        : [];
+      setTasks(tasks);
     } catch (error) {
-      console.error("Erreur lors du chargement des données : ", error);
+      console.error("Erreur lors du chargement des données :", error);
     }
   };
 

@@ -1,4 +1,5 @@
 import axios, { AxiosResponse } from "axios";
+import { TaskCreator } from "../../entities/taskCreator";
 
 interface ApiResponse {
   id: number;
@@ -41,7 +42,16 @@ const UpdateTaskCompleted = async (id: number, completed: boolean): Promise<Axio
   }
 };
 
-export { GetTasks, AddTask, UpdateTaskCompleted };
+const convertApiData = (apiData: { id: string; title: string; completed: boolean }[]) => {
+  return apiData.map(item => {
+    const task = new TaskCreator().factoryMethod(Number(item.id), item.title);
+    task.completed = item.completed;
+    return task;
+  });
+};
+
+
+export { GetTasks, AddTask, UpdateTaskCompleted,convertApiData };
 
 
 

@@ -1,6 +1,7 @@
 import { Task } from "../entities/task";
+import React from 'react';
 
-const TodoList = ({tasks, onToggle}: {tasks: Task[], onToggle: (id: number) => void}) =>{
+const TodoList = React.memo(({tasks, onToggle}: {tasks: Task[], onToggle: (id: number) => void}) =>{
    return (
     <ul>
       {tasks.map((task) => (
@@ -20,6 +21,6 @@ const TodoList = ({tasks, onToggle}: {tasks: Task[], onToggle: (id: number) => v
       ))}
     </ul>
    );
-}
+});
 
 export default TodoList

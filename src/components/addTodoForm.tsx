@@ -4,6 +4,9 @@ interface TaskListProps {
     onAddTask: (task: string) => void;
   }
   
+  /**
+   * Un composant React qui affiche un formulaire pour ajouter une nouvelle tâche.
+   */
   const AddTodoForm: React.FC<TaskListProps> = ({ onAddTask }) => {
     const [title, setTitle] = useState("");
 

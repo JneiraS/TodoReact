@@ -46,13 +46,18 @@ export function UseCases() {
 
   const handleAddTask = async (task: string, priority: string) => {
     try {
-      const response = await AddTask(task, priority);
+      console.log("Ajout de la tâche avec la priorité :", priority);
+      const priorityNumber = priority === "basse" ? 1 : priority === "moyenne" ? 2 : 3;
+      console.log("Ajout de la tâche avec la priorité :", priorityNumber);
+
+      const response = await AddTask(task, priorityNumber);
       const newTask = new TaskCreator().factoryMethod(
         response.data.id,
         response.data.title
       );
-      newTask.priority = priority;
+      newTask.priority = priorityNumber;
       newTask.completed = false;
+      console.log("Tâche ajoutée avec succès :", newTask);
       setTasks([...tasks, newTask]);
     } catch (error) {
       console.error("Erreur lors de l'ajout de la tâche:", error);
@@ -88,5 +93,4 @@ export function UseCases() {
       <TodoList tasks={tasks} onToggle={handleToggle} onDelete={handleDelete} />
     </div>
   );
-}// Exportez le composant au lieu de handleToggle
-export default UseCases;
+}export default UseCases;

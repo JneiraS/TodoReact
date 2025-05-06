@@ -3,7 +3,7 @@ export class Task {
 
     id: number;
     title: string;
-    priority: string;
+    priority: string|Number;
     completed : boolean
 
 

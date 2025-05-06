@@ -42,8 +42,8 @@ const TodoList = React.memo(({
           >   
             {task.title}
             <div className="infos"> 
-              <ButtonDelete onDelete={() => onDelete(task.id)}/>
               <p className={task.priority}>{task.priority}</p>
+              <ButtonDelete onDelete={() => onDelete(task.id)}/>
             </div> 
           </li>
         ))}    

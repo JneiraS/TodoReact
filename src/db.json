@@ -1,40 +1,16 @@
 {
   "tasks": [
     {
-      "id": "3",
-      "title": "Boire un café",
-      "priority": "haute",
-      "completed": false
-    },
-    {
-      "id": "569c",
-      "title": "digiforma",
-      "priority": "basse",
-      "completed": true
-    },
-    {
-      "id": "9a9d",
-      "title": "Finir les exercices",
-      "priority": "moyenne",
-      "completed": true
-    },
-    {
-      "id": "7965",
-      "title": "Création de priorités",
-      "priority": "moyenne",
-      "completed": false
-    },
-    {
       "id": "f260",
       "title": "Apprendre React",
       "priority": "moyenne",
-      "completed": true
+      "completed": false
     },
     {
       "id": "b9ba",
       "title": "Boire",
       "priority": "haute",
-      "completed": true
+      "completed": false
     },
     {
       "id": "d34f",
@@ -43,44 +19,38 @@
       "completed": false
     },
     {
-      "id": "a7e1",
-      "title": "Lire un chapitre d’un livre",
-      "priority": "basse",
-      "completed": false
-    },
-    {
-      "id": "c920",
-      "title": "Faire du sport",
-      "priority": "haute",
-      "completed": false
-    },
-    {
       "id": "e5b2",
       "title": "Préparer la réunion de demain",
       "priority": "haute",
-      "completed": true
-    },
-    {
-      "id": "f7a4",
-      "title": "Coder une API en 4D",
-      "priority": "moyenne",
       "completed": false
     },
     {
-      "id": "h64c",
-      "title": "Acheter des courses",
+      "id": "c186",
+      "title": "sdf",
       "priority": "basse",
       "completed": false
     },
     {
-      "id": "j82d",
-      "title": "Réviser un tutoriel React",
-      "priority": "moyenne",
+      "id": "53cb",
+      "title": "sdfsdgb",
+      "priority": "basse",
       "completed": false
     },
     {
-      "id": "k91f",
-      "title": "Planifier un week-end",
+      "id": "5df2",
+      "title": "sdfs",
+      "priority": "basse",
+      "completed": false
+    },
+    {
+      "id": "1380",
+      "title": "sdfd",
+      "priority": "basse",
+      "completed": false
+    },
+    {
+      "id": "7248",
+      "title": "sdfsd",
       "priority": "basse",
       "completed": false
     }

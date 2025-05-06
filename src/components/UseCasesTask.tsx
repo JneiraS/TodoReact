@@ -19,7 +19,18 @@ export function UseCases() {
         ? response.data.map(item => {
             const task = new TaskCreator().factoryMethod(item.id, item.title);
             task.completed = item.completed;
-            task.priority = item.priority;
+
+            console.log(item.priority);
+
+          if (item.priority == 1) {
+              task.priority = "basse";
+            } else if (item.priority == 2) {
+              task.priority = "moyenne";
+            } else if (item.priority == 3) {
+              task.priority = "haute";
+            }
+
+            
             return task;
           })
         : [];
@@ -71,7 +82,7 @@ export function UseCases() {
   };
 
   return (
-    <div>
+    <div className="todo_container">
       <AddTodoForm onAddTask={handleAddTask} />
       <h2>Mes Tâches</h2>
       <TodoList tasks={tasks} onToggle={handleToggle} onDelete={handleDelete} />

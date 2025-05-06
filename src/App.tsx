@@ -3,6 +3,7 @@ import { useState, useEffect, useCallback } from "react";
 import { ButtonDarkMod } from "./components/buttons";
 import { UseCases } from "./components/UseCasesTask";
 import { THEME } from "./constants/constants";
+import { NavLink, Routes, Route } from "react-router";
 
 function App() {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || THEME.LIGHT);
@@ -16,9 +17,28 @@ function App() {
   }, [theme]);
 
   return (
+    
     <>
+    <nav className="navbar">
+      <ul className="nav-list">
+        <li className="nav-item">
+          <NavLink to="/" className={({ isActive }) => (isActive ? "active" : "")}>
+            Accueil
+          </NavLink>
+        </li>
+        <li className="nav-item">
+          <NavLink to="/todo" className={({ isActive }) => (isActive ? "active" : "")}>
+            ToDo List
+          </NavLink>
+        </li>
+
+      </ul>
       <ButtonDarkMod theme={theme} toggleTheme={toggleTheme} />
-      <UseCases />
+    </nav>
+    <Routes>
+      <Route path="/" element={<h1>Bienvenue sur mon application</h1>} />
+      <Route path="/todo" element={<UseCases />} />
+    </Routes>
     </>
   );
 }

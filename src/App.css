@@ -1,242 +1,215 @@
-  :root {
-    --color-primary: #4a90e2;
-    --color-secondary: #ff6b6b;
-    --color-bg: #f5f5f5;
-    --color-text: #333;
-    --border-radius: 8px;
-    --transition: all 0.1s ease-in-out;
-    --font-family: 'Inter', sans-serif;
+/* Reset de base */
+:root {
+  --primary-color: #0077cc;
+  --secondary-color: #f5f5f5;
+  --text-color: #333;
+  --color-bg: #fff9e6;
+  --color-bg-c: #fcf3d5;
+  --color-text: #1a1a1a;
+  --height-nav : 4em;
+}
+
+[data-theme="dark"] {
+  --color-bg: #1a1a1a;
+  --color-text: #fff9e6;
+  --color-bg-c: #202020;
+}
+
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: #333;
+  padding: 20px;
+}
+
+/* Navbar */
+.navbar {
+  position: fixed;
+  display: flex;
+  height: var(--height-nav);
+  top: 0;
+  left: 0;
+  background-color: #0077cc;
+  padding: 10px 20px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.nav-list {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-item {
+background-color: #0072c4;
+
+
+}
+
+.nav-item a {
+  color: rgb(197, 197, 197);
+  text-decoration: none;
+  font-weight: lighter;
+}
+
+.nav-item a.active {
+font-weight: bolder;
+color: whitesmoke;
+}
+
+.todo_container {
+  display: flex;
+  position: fixed;
+  right: 0;
+  top: calc(var(--height-nav) + 0px);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  border-radius: 8px;
+  animation: slideInFromRight 0.5s ease-out;
+}
+
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
   }
-
-
-  [data-theme="dark"] {
-    --color-bg: #1e1e1e;
-    --color-text: #f5f3f3;
+  to {
+    transform: translateX(0);
+    opacity: 1;
   }
+}
 
 
-  body {
-    font-family: var(--font-family);
-    background-color: var(--color-bg);
-    color: var(--color-text);
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    transition: var(--transition);
-  }
+/* Bouton mode sombre */
+.theme-switch {
+  position: fixed;
+  right: 20px;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  border: 1px solid #ccc;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
 
-  ul {
-    list-style: none;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 2fr));
-    grid-auto-rows: minmax(100px, auto);
-    gap: 20px;
-    list-style: none;
-    padding: 0;
-    max-width: 1200px;
-    width: 100%;
-    margin: 0 auto;  }
+/* Formulaire */
+form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
 
-  li {
-    position: relative;
-    padding: 15px;
-    border-radius: 8px;
-    text-align: center;
-    font-size: 1rem;
-    font-weight: bold;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease-in-out;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    min-height: 100px;
-  }
+form input,
+form select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  flex: 1;
+}
 
-  li:hover {
-    background: #4a90e2;
-    color: var(--color-bg);
-    transform: translateY(-5px);
-  }
-
-
-  form {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px;
-    border-radius: var(--border-radius);
-    margin: 20px auto;
-  }
-
-
-  input, select {
-    flex: 1; 
-    padding: 12px;
-    font-size: 1rem;
-    border: 2px solid #ddd;
-    border-radius: var(--border-radius);
-    outline: none;
-    background-color: var(--color-bg);
-    color: var(--color-text);
-    transition: var(--transition);
-  }
-
-
-  input:focus, select:focus {
-    border-color: var(--color-primary);
-    box-shadow: 0 0 5px rgba(169, 175, 180, 0.5);
-  }
-
-
-  button {
-    background: var(--color-primary);
-    color: white;
-    padding: 12px 20px;
-    border: none;
-    border-radius: var(--border-radius);
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: var(--transition);
-  }
-
-
-  button:hover {
-    background: var(--color-secondary);
-    transform: translateY(-2px);
-  }
-
-
-  @media (max-width: 500px) {
-    form {
-      flex-direction: column;
-      gap: 8px;
-    }
-  
-    input, select {
-      width: 100%;
-    }
-  
-    button {
-      width: 100%;
-    }
-  }
-
-  #root {
-    text-align: center;
-    padding: 20px;
-    max-width: 900px;
-    border-radius: var(--border-radius);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    background: white;
-    transition: var(--transition);
-  }
-
-  [data-theme="dark"] #root {
-    background: #292929;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  }
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(-10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  h1 {
-    font-size: 2rem;
-    animation: fadeIn 0.6s ease-in-out;
-  }
-
-
-  .button {
-    background: var(--color-primary);
-    color: white;
-    padding: 12px 24px;
-    border: none;
-    border-radius: var(--border-radius);
-    cursor: pointer;
-    font-size: 1rem;
-    font-weight: bold;
-    transition: var(--transition);
-    margin-top: 20px;
-  }
-
-  .button:hover {
-    background: var(--color-secondary);
-    transform: translateY(-2px);
-  }
-
-  .theme-switch {
-    background: none;
-    border: 2px solid var(--color-text);
-    color: var(--color-text);
-    padding: 8px 16px;
-    border-radius: var(--border-radius);
-    cursor: pointer;
-    font-size: 1rem;
-    margin-top: 20px;
-    transition: var(--transition);
-  }
-
-  .theme-switch:hover {
-    background: var(--color-text);
-    color: var(--color-bg);
-  }
-
-  .infos {
-    margin-top: auto;
-    display: flex;
-    gap: 5px;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-  }
-
-  .delete-button {
-    background-color: rgb(255, 68, 68);
-    color: white;
-    font-size: 10px;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 4px;
-    cursor: pointer;
-    height: fit-content;
-    transition: var(--transition);
-  }
-
-  .moyenne,
-  .basse,
-  .haute { 
-  font-weight: 100;
-  border-radius: 4px;
-  font-size: 10px;
-  padding: 0 .5em;
+form button {
+  padding: 8px 16px;
+  background-color: #28a745;
   color: white;
-  
-  }
-  .basse {
-    background-color: rgb(85, 185, 85);
-  }
-  .haute {
-    background-color: rgb(255, 68, 68)
-  }
-  .moyenne {
-    background-color: rgb(243, 191, 95);
-  }
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
 
-  .filter-buttons {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    font-size: smaller;
-    margin-bottom: 20px;
-  }
+/* Tâches */
+h2 {
+  margin: 20px 0 10px;
+}
+
+.filter-buttons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.filter-buttons button {
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: rgb(255, 255, 255);
+  cursor: pointer;
+}
+
+/* ---------------- Liste des tâches -----------------------*/
+
+li {
+  list-style: none;
+  opacity: 1;
+  cursor: pointer;
+  padding: 12px 16px;
+  margin-bottom: 8px;
+  background-color: var(--color-bg-c);
+  color: var(--color-text);
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+li:hover {
+  background-color: #aaaaaa;
+  color:  #333;
+}
+
+.infos {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.delete-button {
+  background-color: #ff5252;
+  border: none;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s ease;
+}
+
+.delete-button:hover {
+  background-color: #e53935;
+}
+
+.moyenne {
+  background-color: #ffd54f;
+}
+.haute {
+  background-color: #ff5252;
+}
+.basse {
+  background-color: #52da6f;
+}
+
+
+.moyenne,
+.haute,
+.basse {
+  color: #333;
+  font-size: 13px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  margin: 0;
+}

@@ -6,7 +6,7 @@ interface ButtonDarkModProps {
 function ButtonDarkMod({ theme, toggleTheme }: ButtonDarkModProps) {
   return (
     <button className="theme-switch" onClick={toggleTheme}>
-      {theme === "light" ? "🌙 Mode sombre" : "☀️ Mode clair"}
+      {theme === "light" ? "Mode sombre" : "Mode clair"}
     </button>
   );
 }

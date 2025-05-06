@@ -46,24 +46,43 @@ export function UseCases() {
 
   const handleAddTask = async (task: string, priority: string) => {
     try {
-      console.log("Ajout de la tâche avec la priorité :", priority);
       const priorityNumber = priority === "basse" ? 1 : priority === "moyenne" ? 2 : 3;
-      console.log("Ajout de la tâche avec la priorité :", priorityNumber);
-
       const response = await AddTask(task, priorityNumber);
-      const newTask = new TaskCreator().factoryMethod(
-        response.data.id,
-        response.data.title
-      );
-      newTask.priority = priorityNumber;
-      newTask.completed = false;
-      console.log("Tâche ajoutée avec succès :", newTask);
-      setTasks([...tasks, newTask]);
+      
+
+      if (response.status === 200) {
+        // Utiliser les données de la tâche renvoyées par l'API
+        const taskData = response.data.task;
+        
+        console.log("Données de la tâche renvoyées par l'API :");
+
+        // Créer un nouvel objet Task avec les données renvoyées
+        const newTask = new TaskCreator().factoryMethod(
+          taskData.id,
+          taskData.title
+        );
+        
+        // Définir la priorité en format texte
+        if (taskData.priority === 1) {
+          newTask.priority = "basse";
+        } else if (taskData.priority === 2) {
+          newTask.priority = "moyenne";
+        } else if (taskData.priority === 3) {
+          newTask.priority = "haute";
+        }
+        
+        newTask.completed = taskData.completed;
+
+        // Mettre à jour l'état avec la nouvelle tâche
+        setTasks(prevTasks => [...prevTasks, newTask]);
+      }
     } catch (error) {
       console.error("Erreur lors de l'ajout de la tâche:", error);
     }
   };
-
+  
+  
+  
   const handleToggle = (id: number) => {
     setTasks((prevTasks) => prevTasks.map(task => {
       if (task.id === id) {

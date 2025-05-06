@@ -7,13 +7,15 @@ axios.defaults.headers.common['Content-Type'] = 'application/json';
 axios.defaults.headers.common['Accept'] = 'application/json';
 
 interface ApiResponse {
-  id: number;
-  title: string;
-  completed: boolean
-  assigned_to:number
-
+  message: string;
+  task: {
+    id: number;
+    title: string;
+    priority: number;
+    assigned_to: number;
+    completed: boolean;
+  }
 }
-
 /**
 /** Récupère de manière asynchrone une liste de tâches depuis l'API. */
 const GetTasks = async (): Promise<AxiosResponse<ApiResponse>> => {
@@ -37,8 +39,6 @@ const AddTask = async (title: string, priority: number): Promise<AxiosResponse<A
       completed: false,
       assigned_to: 1,
     };
-
-    console.log(newTask);
     return await axios.post<ApiResponse>(API.TASKS, newTask);
   } catch (error) {
     console.error("Erreur lors de l'ajout de la tâche :", error);

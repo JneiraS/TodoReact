@@ -4,7 +4,9 @@ export class Task {
     id: number;
     title: string;
     priority: string|Number;
-    completed : boolean
+    completed : boolean;
+    assigned_to : number | undefined
+    
 
 
     constructor(id: number, title: string) {
@@ -12,6 +14,7 @@ export class Task {
         this.title = title;
         this.priority = "basse"
         this.completed = false
+        this.assigned_to = 0
     }
 
     public setId(id: number) {

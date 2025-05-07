@@ -19,7 +19,7 @@ export function UseCases() {
         ? response.data.map(item => {
             const task = new TaskCreator().factoryMethod(item.id, item.title);
             task.completed = item.completed;
-
+            task.assigned_to = item.assigned_to;
             console.log(item.priority);
 
           if (item.priority == 1) {
@@ -29,11 +29,10 @@ export function UseCases() {
             } else if (item.priority == 3) {
               task.priority = "haute";
             }
-
-            
             return task;
           })
         : [];
+
       setTasks(tasks);
     } catch (error) {
       console.error("Erreur lors du chargement des données :", error);
@@ -44,17 +43,17 @@ export function UseCases() {
     fetchData();
   }, []);
 
-  const handleAddTask = async (task: string, priority: string) => {
+  const handleAddTask = async (task: string, priority: string, assigned_to: number | undefined) => {
     try {
       const priorityNumber = priority === "basse" ? 1 : priority === "moyenne" ? 2 : 3;
-      const response = await AddTask(task, priorityNumber);
+      const response = await AddTask(task, priorityNumber, assigned_to);
       
 
       if (response.status === 200) {
         // Utiliser les données de la tâche renvoyées par l'API
         const taskData = response.data.task;
         
-        console.log("Données de la tâche renvoyées par l'API :");
+        console.log("Données de la tâche renvoyées par l'API :", taskData);
 
         // Créer un nouvel objet Task avec les données renvoyées
         const newTask = new TaskCreator().factoryMethod(
@@ -71,6 +70,7 @@ export function UseCases() {
           newTask.priority = "haute";
         }
         
+        newTask.assigned_to = taskData.assigned_to,
         newTask.completed = taskData.completed;
 
         // Mettre à jour l'état avec la nouvelle tâche
@@ -80,8 +80,6 @@ export function UseCases() {
       console.error("Erreur lors de l'ajout de la tâche:", error);
     }
   };
-  
-  
   
   const handleToggle = (id: number) => {
     setTasks((prevTasks) => prevTasks.map(task => {

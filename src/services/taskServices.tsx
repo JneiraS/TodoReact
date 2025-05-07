@@ -30,14 +30,14 @@ const GetTasks = async (): Promise<AxiosResponse<ApiResponse>> => {
 /**
  * Ajoute une nouvelle tâche de manière asynchrone.
  */
-const AddTask = async (title: string, priority: number): Promise<AxiosResponse<ApiResponse>> => {
+const AddTask = async (title: string, priority: number,assigned_to:number | undefined): Promise<AxiosResponse<ApiResponse>> => {
   try {
     const newTask = {
       id:0,
       title:title,
       priority,
       completed: false,
-      assigned_to: 1,
+      assigned_to: assigned_to,
     };
     return await axios.post<ApiResponse>(API.TASKS, newTask);
   } catch (error) {
@@ -70,4 +70,14 @@ const DeleteTask = async (id: number): Promise<AxiosResponse<void>> => {
   }
 };
 
-export { GetTasks, AddTask, UpdateTaskCompleted, DeleteTask };
+
+const GetAllUsers = async (): Promise<AxiosResponse<ApiResponse>> => {
+  try {
+    return await axios.get<ApiResponse>(API.USERS);
+  } catch (error) {
+    console.error("Erreur lors de la récupération des données :", error);
+    throw error;
+  }
+};
+
+export { GetTasks, AddTask, UpdateTaskCompleted, DeleteTask, GetAllUsers };

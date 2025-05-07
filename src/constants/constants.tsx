@@ -6,6 +6,7 @@ const THEME = {
 
 const API = {
   BASE_URL: 'http://127.0.0.1:8000',
-    TASKS: '/tasks'
+    TASKS: '/tasks',
+    USERS: '/user',
   };
   export { THEME, API };

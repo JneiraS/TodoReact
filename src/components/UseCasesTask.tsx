@@ -87,8 +87,9 @@ export function UseCases() {
       if (task.id === id) {
         const updatedTask = new TaskCreator().factoryMethod(task.id, task.title);
         updatedTask.completed = !task.completed;
-        updatedTask.priority = task.priority;
-        UpdateTaskCompleted(task.id, updatedTask.completed);
+        updatedTask.priority = task.priority === "basse" ? 1 : task.priority === "moyenne" ? 2 : 3;
+        updatedTask.assigned_to = task.assigned_to;
+        UpdateTaskCompleted(updatedTask);
         console.log(updatedTask);
         return updatedTask;
       }

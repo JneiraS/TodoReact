@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import { API } from "../constants/constants";
+import { Task } from "../entities/task";
 
 // Configuration globale d'Axios
 axios.defaults.baseURL = API.BASE_URL;
@@ -49,14 +50,35 @@ const AddTask = async (title: string, priority: number,assigned_to:number | unde
 /**
  * Mets à jour le statut de complétion d'une tâche de manière asynchrone.
  */
-const UpdateTaskCompleted = async (id: number, completed: boolean): Promise<AxiosResponse<ApiResponse>> => {
+const UpdateTaskCompleted = async (task: Task): Promise<AxiosResponse<ApiResponse>> => {
   try {
-    return await axios.patch<ApiResponse>(`${API.TASKS}/${id}`, { completed });
+    // Priorité en nombre
+    const priorityMap: Record<string, number> = {
+      'basse': 1,
+      'moyenne': 2,
+      'haute': 3
+    };
+    
+    // Conversion de la priorité en nombre
+    const priorityValue = typeof task.priority === 'string' 
+      ? priorityMap[task.priority] || task.priority 
+      : task.priority;
+    
+    // Send the task data in the format expected by the API
+    return await axios.put<ApiResponse>(`${API.TASKS}/${task.id}`, {
+      id: task.id,
+      title: task.title,
+      priority: priorityValue,
+      assigned_to: task.assigned_to,
+      completed: task.completed
+    });
   } catch (error) {
     console.error("Erreur lors de la mise à jour de la tâche :", error);
     throw error;
   }
 };
+
+
 
 /**
 * Supprime une tâche de manière asynchrone.

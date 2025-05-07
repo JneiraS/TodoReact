@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { GetAllUsers } from "../services/taskServices";
+import React, { useState } from "react";
 import { User } from "../entities/user";
+import fetchAndSetUsers from "./UseCasesTask";
 
 interface TaskListProps {
     onAddTask: (task: string, priority: string, userId?: number) => void;
@@ -22,13 +22,7 @@ const AddTodoForm: React.FC<TaskListProps> = ({ onAddTask }) => {
         setTitle("");
     };
 
-    useEffect(() => {
-        const fetchUsers = async () => {
-            const response = await GetAllUsers();
-            setUsers(response.data as unknown as User[]);
-        };
-        fetchUsers();
-    }, []);
+    fetchAndSetUsers(setUsers);
 
     return (
         <form onSubmit={handleSubmit}>
@@ -65,3 +59,6 @@ const AddTodoForm: React.FC<TaskListProps> = ({ onAddTask }) => {
         </form>
     );
 }; export default AddTodoForm;
+
+
+

@@ -1,8 +1,8 @@
 import { Task } from "../entities/task";
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { ButtonDelete } from "./buttons";
-import { GetAllUsers } from "../services/taskServices";
 import { User } from "../entities/user";
+import fetchAndSetUsers from "./UseCasesTask";
 
 const TodoList = React.memo(({
   tasks,
@@ -14,7 +14,7 @@ const TodoList = React.memo(({
   onDelete: (id: number) => void
 }) => {
   const [priorityFilter, setPriorityFilter] = useState<string>('all');
-    const [users, setUsers] = useState<User[]>([]);
+  const [users, setUsers] = useState<User[]>([]);
 
   // Filtre les tâches en fonction de la priorité sélectionnée
   const filteredTasks = React.useMemo(() =>
@@ -22,15 +22,7 @@ const TodoList = React.memo(({
     [tasks, priorityFilter]
   );
 
-  useEffect(() => {
-    const fetchUsers = async () => {
-        const response = await GetAllUsers();
-        setUsers(response.data as unknown as User[]);
-       
-    };
-    fetchUsers();
-}, []);
-
+  fetchAndSetUsers(setUsers);
 
   // Function to get user name by ID
   const getUserNameById = (userId: number | undefined): string => {
@@ -63,9 +55,9 @@ const TodoList = React.memo(({
           >
             {task.title}
 
-            
+
             <div className="infos">
-            {getUserNameById(task.assigned_to)}
+              {getUserNameById(task.assigned_to)}
               <p className={String(task.priority)}>{task.priority.toString()}</p>
               <ButtonDelete onDelete={() => onDelete(task.id)} />
             </div>

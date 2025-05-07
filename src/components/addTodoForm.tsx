@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { GetAllUsers } from "../services/taskServices";
 import { User } from "../entities/user";
 
@@ -25,8 +25,7 @@ const AddTodoForm: React.FC<TaskListProps> = ({ onAddTask }) => {
     useEffect(() => {
         const fetchUsers = async () => {
             const response = await GetAllUsers();
-            setUsers(response.data);
-           
+            setUsers(response.data as unknown as User[]);
         };
         fetchUsers();
     }, []);
@@ -40,13 +39,13 @@ const AddTodoForm: React.FC<TaskListProps> = ({ onAddTask }) => {
                 placeholder="Ajouter une tâche"
             />
 
-            <select 
+            <select
                 value={priority}
                 onChange={(e) => setPriority(e.target.value)}
             >
-                <option value="basse">Priorité Basse</option>  
+                <option value="basse">Priorité Basse</option>
                 <option value="moyenne">Priorité Moyenne</option>
-                <option value="haute">Priorité Haute</option>         
+                <option value="haute">Priorité Haute</option>
             </select>
 
             {/* Replace the nested select with a direct user selection */}
@@ -65,4 +64,4 @@ const AddTodoForm: React.FC<TaskListProps> = ({ onAddTask }) => {
             <button type="submit">Add</button>
         </form>
     );
-};export default AddTodoForm;
+}; export default AddTodoForm;

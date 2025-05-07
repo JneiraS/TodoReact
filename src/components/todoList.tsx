@@ -25,7 +25,7 @@ const TodoList = React.memo(({
   useEffect(() => {
     const fetchUsers = async () => {
         const response = await GetAllUsers();
-        setUsers(response.data);
+        setUsers(response.data as unknown as User[]);
        
     };
     fetchUsers();

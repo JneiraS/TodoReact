@@ -1,17 +1,17 @@
 :root {
-  --primary-color: #6366f1;
+  --primary-color: #66999B;
   --primary-light: #818cf8;
   --primary-dark: #4f46e5;
   --success-color: #10b981;
   --warning-color: #f59e0b;
   --danger-color: #ef4444;
-  --gray-50: #f9fafb;
-  --gray-100: #f3f4f6;
-  --gray-200: #e5e7eb;
-  --gray-300: #d1d5db;
-  --gray-600: #4b5563;
-  --gray-700: #374151;
-  --gray-800: #1f2937;
+  --gray-50: #FFF7EB;
+  --gray-100: #FCF4E8;
+  --gray-200: #F8F1E5;
+  --gray-300: #F1EADF;
+  --gray-600: #818183;
+  --gray-700: #494D55;
+  --gray-800: #2D333E;
   --gray-900: #111827;
   --border-radius: 8px;
   --box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
@@ -308,6 +308,13 @@ li:has(.haute) {
 .delete-button:hover {
   background-color: var(--danger-color);
   color: white;
+}
+
+.Done {
+  color: var(--success-color);
+  font-weight: bold;
+  position: absolute;
+  right: -25%;
 }
 
 /* Responsive design */

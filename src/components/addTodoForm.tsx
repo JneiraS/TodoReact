@@ -42,23 +42,24 @@ const AddTodoForm: React.FC<TaskListProps> = ({ onAddTask }) => {
                 <option value="haute">Priorité Haute</option>
             </select>
 
-            {/* Replace the nested select with a direct user selection */}
+      
             <select
-                value={selectedUserId}
+                value={selectedUserId || ''}
                 onChange={(e) => setSelectedUserId(Number(e.target.value) || undefined)}
             >
+
                 <option value="">Sélectionner un utilisateur</option>
                 {users.map(user => (
                     <option key={user.id} value={user.id}>
                         {user.name}
                     </option>
                 ))}
-            </select>
-
-            <button type="submit">Add</button>
+            </select>   
+                     <button type="submit">Add</button>
         </form>
     );
-}; export default AddTodoForm;
+}; 
 
+export default AddTodoForm;
 
 

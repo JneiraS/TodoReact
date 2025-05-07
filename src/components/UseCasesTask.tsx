@@ -21,7 +21,7 @@ export function UseCases() {
           const task = new TaskCreator().factoryMethod(item.id, item.title);
           task.completed = item.completed;
           task.assigned_to = item.assigned_to;
-          console.log(item.priority);
+    
 
           if (item.priority == 1) {
             task.priority = "basse";
@@ -47,14 +47,13 @@ export function UseCases() {
   const handleAddTask = async (task: string, priority: string, assigned_to: number | undefined) => {
     try {
       const priorityNumber = priority === "basse" ? 1 : priority === "moyenne" ? 2 : 3;
-      const response = await AddTask(task, priorityNumber, assigned_to);
-
+      const assigned_to_number = assigned_to === undefined ? 0 : assigned_to;
+      const response = await AddTask(task, priorityNumber, assigned_to_number);
+     
 
       if (response.status === 200) {
         // Utiliser les données de la tâche renvoyées par l'API
         const taskData = response.data.task;
-
-        console.log("Données de la tâche renvoyées par l'API :", taskData);
 
         // Créer un nouvel objet Task avec les données renvoyées
         const newTask = new TaskCreator().factoryMethod(
@@ -76,6 +75,7 @@ export function UseCases() {
 
         // Mettre à jour l'état avec la nouvelle tâche
         setTasks(prevTasks => [...prevTasks, newTask]);
+  
       }
     } catch (error) {
       console.error("Erreur lors de l'ajout de la tâche:", error);
@@ -90,7 +90,7 @@ export function UseCases() {
         updatedTask.priority = task.priority === "basse" ? 1 : task.priority === "moyenne" ? 2 : 3;
         updatedTask.assigned_to = task.assigned_to;
         UpdateTaskCompleted(updatedTask);
-        console.log(updatedTask);
+        updatedTask.priority = updatedTask.priority === 1 ? "basse" : updatedTask.priority === 2 ? "moyenne" : "haute";
         return updatedTask;
       }
       return task;

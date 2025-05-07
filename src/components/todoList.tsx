@@ -27,7 +27,7 @@ const TodoList = React.memo(({
   // Function to get user name by ID
   const getUserNameById = (userId: number | undefined): string => {
     const user = users.find(user => user.id === userId);
-    return user ? user.name : `User ${userId}`;
+    return user ? user.name : ``;
   };
 
 
@@ -45,25 +45,30 @@ const TodoList = React.memo(({
             key={task.id}
             onClick={() => onToggle(task.id)}
             style={{
-              textDecoration: task.completed ? 'line-through' : 'none',
-              opacity: task.completed ? 0.5 : 1,
+              width: task.completed ? '80%' : '100%',
               cursor: 'pointer',
               padding: '8px',
               marginBottom: '4px',
               backgroundColor: 'rgba(128, 128, 128, 0.05)',
             }}
           >
-            {task.title}
 
+            {task.title}
+            {task.completed && <span className="Done">Tâche terminée !</span>}
 
             <div className="infos">
               {getUserNameById(task.assigned_to)}
               <p className={String(task.priority)}>{task.priority.toString()}</p>
               <ButtonDelete onDelete={() => onDelete(task.id)} />
             </div>
+
           </li>
-        ))}          </ul>    </div>
-  );
+
+
+
+        ))}
+      </ul>
+    </div>);
 });
 
 export default TodoList

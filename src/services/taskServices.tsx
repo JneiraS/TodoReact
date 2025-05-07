@@ -31,7 +31,7 @@ const GetTasks = async (): Promise<AxiosResponse<ApiResponse>> => {
 /**
  * Ajoute une nouvelle tâche de manière asynchrone.
  */
-const AddTask = async (title: string, priority: number,assigned_to:number | undefined): Promise<AxiosResponse<ApiResponse>> => {
+const AddTask = async (title: string, priority: number,assigned_to:number): Promise<AxiosResponse<ApiResponse>> => {
   try {
     const newTask = {
       id:0,

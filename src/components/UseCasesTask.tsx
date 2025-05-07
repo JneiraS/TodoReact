@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { TaskCreator } from "../entities/taskCreator";
-import { AddTask, GetTasks, UpdateTaskCompleted, DeleteTask } from "../services/taskServices";
+import { AddTask, GetTasks, UpdateTaskCompleted, DeleteTask, GetAllUsers } from "../services/taskServices";
 import { Task } from "../entities/task";
 import TodoList from "./todoList";
 import AddTodoForm from "./addTodoForm";
+import { User } from "../entities/user";
 
 
 // Le composant `UseCases` gère les tâches : récupération, ajout, 
@@ -15,22 +16,22 @@ export function UseCases() {
   const fetchData = async () => {
     try {
       const response = await GetTasks();
-      const tasks = Array.isArray(response.data) 
+      const tasks = Array.isArray(response.data)
         ? response.data.map(item => {
-            const task = new TaskCreator().factoryMethod(item.id, item.title);
-            task.completed = item.completed;
-            task.assigned_to = item.assigned_to;
-            console.log(item.priority);
+          const task = new TaskCreator().factoryMethod(item.id, item.title);
+          task.completed = item.completed;
+          task.assigned_to = item.assigned_to;
+          console.log(item.priority);
 
           if (item.priority == 1) {
-              task.priority = "basse";
-            } else if (item.priority == 2) {
-              task.priority = "moyenne";
-            } else if (item.priority == 3) {
-              task.priority = "haute";
-            }
-            return task;
-          })
+            task.priority = "basse";
+          } else if (item.priority == 2) {
+            task.priority = "moyenne";
+          } else if (item.priority == 3) {
+            task.priority = "haute";
+          }
+          return task;
+        })
         : [];
 
       setTasks(tasks);
@@ -47,12 +48,12 @@ export function UseCases() {
     try {
       const priorityNumber = priority === "basse" ? 1 : priority === "moyenne" ? 2 : 3;
       const response = await AddTask(task, priorityNumber, assigned_to);
-      
+
 
       if (response.status === 200) {
         // Utiliser les données de la tâche renvoyées par l'API
         const taskData = response.data.task;
-        
+
         console.log("Données de la tâche renvoyées par l'API :", taskData);
 
         // Créer un nouvel objet Task avec les données renvoyées
@@ -60,7 +61,7 @@ export function UseCases() {
           taskData.id,
           taskData.title
         );
-        
+
         // Définir la priorité en format texte
         if (taskData.priority === 1) {
           newTask.priority = "basse";
@@ -69,9 +70,9 @@ export function UseCases() {
         } else if (taskData.priority === 3) {
           newTask.priority = "haute";
         }
-        
+
         newTask.assigned_to = taskData.assigned_to,
-        newTask.completed = taskData.completed;
+          newTask.completed = taskData.completed;
 
         // Mettre à jour l'état avec la nouvelle tâche
         setTasks(prevTasks => [...prevTasks, newTask]);
@@ -80,7 +81,7 @@ export function UseCases() {
       console.error("Erreur lors de l'ajout de la tâche:", error);
     }
   };
-  
+
   const handleToggle = (id: number) => {
     setTasks((prevTasks) => prevTasks.map(task => {
       if (task.id === id) {
@@ -88,6 +89,7 @@ export function UseCases() {
         updatedTask.completed = !task.completed;
         updatedTask.priority = task.priority;
         UpdateTaskCompleted(task.id, updatedTask.completed);
+        console.log(updatedTask);
         return updatedTask;
       }
       return task;
@@ -110,4 +112,18 @@ export function UseCases() {
       <TodoList tasks={tasks} onToggle={handleToggle} onDelete={handleDelete} />
     </div>
   );
-}export default UseCases;
+
+};
+
+
+export function fetchAndSetUsers(setUsers: React.Dispatch<React.SetStateAction<User[]>>) {
+  useEffect(() => {
+    const fetchUsers = async () => {
+      const response = await GetAllUsers();
+      setUsers(response.data as unknown as User[]);
+    };
+    fetchUsers();
+  }, []);
+}
+
+export default fetchAndSetUsers;
